@@ -19,7 +19,10 @@ export default function Home() {
 
 
   useEffect(() => {
-    fetchVersions();
+    const fetchData = async () => {
+      await fetchVersions();
+    };
+    fetchData();
   }, []);
 
   const saveVersion = async () => {
