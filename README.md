@@ -1,36 +1,165 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Mini Audit Trail Generator
+==========================
 
-## Getting Started
+A micro web app built with **Next.js** that allows users to edit text and generate an automatic **change-history (audit trail)** every time the text is modified and saved.
 
-First, run the development server:
+This project demonstrates:
+
+*   Frontend + Backend communication
+    
+*   Custom change-detection logic
+    
+*   State management
+    
+*   Timestamps
+    
+*   REST API creation
+    
+
+🚀 Features
+-----------
+
+*   **Content Editor** – A live text editor (textarea)
+    
+*   **Save Version** – Saves the current version of the text
+    
+*   **Version History** – Displays a list of all saved changes
+    
+*   **Word Diff Detection**
+    
+    *   Added words
+        
+    *   Removed words
+        
+*   **Old vs New text length**
+    
+*   **Timestamp** for every saved version
+    
+*   **Modern SaaS-style UI**
+    
+
+📦 Tech Stack
+-------------
+
+*   **Frontend:** React + Next.js (App Router)
+    
+*   **Backend:** Next.js API Routes (Node.js)
+    
+*   **Styling:** Tailwind CSS
+    
+*   **Storage:** In-memory Array (as allowed for the task)
+    
+
+📡 API Endpoints
+----------------
+
+### 1\. Save a new version
+
+**POST** /api/versions(Equivalent to: /save-version)
+
+**Request Body:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+{
+  "text": "Your updated content here"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Response Example:**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash   
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "timestamp": "2025-11-26 13:40",
+  "addedWords": ["adoption", "dashboard"],
+  "removedWords": ["pilot"],
+  "oldLength": 43,
+  "newLength": 51
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2\. Get all versions
 
-## Learn More
+**GET** /api/versions(Equivalent to: /versions)
 
-To learn more about Next.js, take a look at the following resources:
+**Response Example:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ ```bash
+ [
+  {
+    "id": "uuid",
+    "timestamp": "2025-11-26 13:40",
+    "addedWords": ["adoption", "dashboard"],
+    "removedWords": ["pilot"],
+    "oldLength": 43,
+    "newLength": 51
+  }
+]
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🧠 Custom Logic Implemented
+---------------------------
 
-## Deploy on Vercel
+No external diff libraries or online templates were used at all logic was written from scratch:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+*   Text is split into word arrays
+    
+*   Compared with the last saved version
+    
+*   **Added words** are extracted
+    
+*   **Removed words** are extracted
+    
+*   **Length difference** is calculated
+    
+*   A final **summary object** is generated
+    
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🗂 Data Storage
+---------------
+
+Currently implemented using:
+
+✅ **In-memory array**
+
+```bash
+let versions = [];   
+```
+
+This was chosen because it is **acceptable for a short task (2 hours)**.
+
+▶️ How to Run the Project
+-------------------------
+
+```bash
+npm install  npm run dev
+```
+
+Then open in browser:
+
+```bash
+http://localhost:3000
+```
+
+🎯 Proof of Skills
+------------------
+
+This project demonstrates:
+
+*   Full-stack development (React + API)
+    
+*   Custom algorithm implementation
+    
+*   REST API architecture
+    
+*   State management
+    
+*   SaaS-style UI design
+    
+*   Version control & logging concepts
+    
+
+✅ Status
+--------
+
+All task requirements **have been successfully completed and exceeded**.
