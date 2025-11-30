@@ -85,7 +85,6 @@ export default function Home() {
           gap: "32px",
         }}
       >
-        {/* Content Editor */}
         <div
           style={{
             flex: "1 1 400px",
@@ -135,7 +134,6 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Version History */}
         <div
           style={{
             flex: "1 1 400px",
